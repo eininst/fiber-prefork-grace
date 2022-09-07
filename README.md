@@ -16,7 +16,7 @@ go get -u github.com/eininst/fiber-prefork-grace
 package main
 
 import (
-    grace "github.com/eininst/fiber-grace"
+    grace "github.com/eininst/fiber-prefork-grace"
     "github.com/gofiber/fiber/v2"
     "time"
 )
@@ -38,16 +38,16 @@ kill -term pid
 ```
 
 ```text
-2022/09/08 06:21:01 [GRACE] Received signal: terminated
-2022/09/08 06:21:01 [GRACE] Child pid 35210 Shotdown
-2022/09/08 06:21:01 [GRACE] Child pid 35212 Shotdown
-2022/09/08 06:21:01 [GRACE] Child pid 35213 Shotdown
-2022/09/08 06:21:01 [GRACE] Child pid 35214 Shotdown
-2022/09/08 06:21:01 [GRACE] Child pid 35208 Shotdown
-2022/09/08 06:21:01 [GRACE] Child pid 35207 Shotdown
-2022/09/08 06:21:01 [GRACE] Child pid 35209 Shotdown
-2022/09/08 06:21:01 [GRACE] Child pid 35211 Shotdown
-2022/09/08 06:21:01 [GRACE] Main  pid 35204 Shotdown
+[GRACE] 2022/09/08 06:29:37 Received signal: terminated
+[GRACE] 2022/09/08 06:29:37 Child pid 35951 Shotdown
+[GRACE] 2022/09/08 06:29:37 Child pid 35953 Shotdown
+[GRACE] 2022/09/08 06:29:37 Child pid 35948 Shotdown
+[GRACE] 2022/09/08 06:29:37 Child pid 35946 Shotdown
+[GRACE] 2022/09/08 06:29:37 Child pid 35949 Shotdown
+[GRACE] 2022/09/08 06:29:37 Child pid 35952 Shotdown
+[GRACE] 2022/09/08 06:29:37 Child pid 35950 Shotdown
+[GRACE] 2022/09/08 06:29:37 Child pid 35947 Shotdown
+[GRACE] 2022/09/08 06:29:37 Main  pid 35945 Shotdown
 ```
 
 > You can customize it all you want:

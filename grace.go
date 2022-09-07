@@ -17,7 +17,7 @@ import (
 var glog flog.Interface
 
 func init() {
-	f := fmt.Sprintf("${time} %s[GRACE]%s ${msg}", flog.Magenta, flog.Reset)
+	f := fmt.Sprintf("%s[GRACE]%s ${time} ${msg}", flog.Magenta, flog.Reset)
 	glog = flog.New(flog.Config{
 		Format: f,
 	})
@@ -40,7 +40,11 @@ func Listen(app *fiber.App, addr string, config ...Config) {
 	cfg := DefaultConfig
 	if len(config) > 0 {
 		cfg = config[0]
+		if cfg.Sig == nil {
+			cfg.Sig = DefaultConfig.Sig
+		}
 	}
+
 	go func() {
 		if app.Config().Prefork {
 			pidMap = make(map[int]int)
