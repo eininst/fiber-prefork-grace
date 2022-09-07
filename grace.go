@@ -43,6 +43,9 @@ func Listen(app *fiber.App, addr string, config ...Config) {
 		if cfg.Signal == nil {
 			cfg.Signal = DefaultConfig.Signal
 		}
+		if cfg.Timeout == 0 {
+			cfg.Timeout = DefaultConfig.Timeout
+		}
 	}
 
 	go func() {
@@ -66,6 +69,9 @@ func ListenTLS(app *fiber.App, addr string, certFile, keyFile string, config ...
 		cfg = config[0]
 		if cfg.Signal == nil {
 			cfg.Signal = DefaultConfig.Signal
+		}
+		if cfg.Timeout == 0 {
+			cfg.Timeout = DefaultConfig.Timeout
 		}
 	}
 	go func() {
