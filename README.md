@@ -54,6 +54,13 @@ kill -term pid
 ```go
 grace.Listen(app, ":8080", grace.Config{
     Timeout: time.Second * 15,
-    Sig:     syscall.SIGILL,
+    Signal:  syscall.SIGTERM,
 })
 ```
+
+
+> See [examples](/examples)
+
+## License
+
+*MIT*

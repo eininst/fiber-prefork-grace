@@ -26,12 +26,12 @@ func init() {
 const FIBER_CHILD_LOCK_FILE = "/tmp/fiber_child.lock"
 
 type Config struct {
-	Sig     os.Signal
+	Signal  os.Signal
 	Timeout time.Duration
 }
 
 var DefaultConfig = Config{
-	Sig:     syscall.SIGTERM,
+	Signal:  syscall.SIGTERM,
 	Timeout: time.Second * 10,
 }
 var pidMap map[int]int
@@ -40,8 +40,8 @@ func Listen(app *fiber.App, addr string, config ...Config) {
 	cfg := DefaultConfig
 	if len(config) > 0 {
 		cfg = config[0]
-		if cfg.Sig == nil {
-			cfg.Sig = DefaultConfig.Sig
+		if cfg.Signal == nil {
+			cfg.Signal = DefaultConfig.Signal
 		}
 	}
 
@@ -64,6 +64,9 @@ func ListenTLS(app *fiber.App, addr string, certFile, keyFile string, config ...
 	cfg := DefaultConfig
 	if len(config) > 0 {
 		cfg = config[0]
+		if cfg.Signal == nil {
+			cfg.Signal = DefaultConfig.Signal
+		}
 	}
 	go func() {
 		if app.Config().Prefork {
@@ -104,11 +107,11 @@ func listenSig(app *fiber.App, cfg Config) {
 		<-stop
 	} else {
 		c := make(chan os.Signal, 1)
-		signal.Notify(c, cfg.Sig)
+		signal.Notify(c, cfg.Signal)
 		for {
 			sig := <-c
 			switch sig {
-			case cfg.Sig:
+			case cfg.Signal:
 				f, _ := os.Create(FIBER_CHILD_LOCK_FILE)
 				_ = f.Close()
 				if app.Config().Prefork {
