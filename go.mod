@@ -1,4 +1,4 @@
-module github.com/eininst/fiber-grace
+module github.com/eininst/fiber-prefork-grace
 
 go 1.19
 

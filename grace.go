@@ -14,6 +14,15 @@ import (
 	"time"
 )
 
+var glog flog.Interface
+
+func init() {
+	f := fmt.Sprintf("${time} %s[GRACE]%s ${msg}", flog.Magenta, flog.Reset)
+	glog = flog.New(flog.Config{
+		Format: f,
+	})
+}
+
 const FIBER_CHILD_LOCK_FILE = "/tmp/fiber_child.lock"
 
 type Config struct {
@@ -81,7 +90,7 @@ func listenSig(app *fiber.App, cfg Config) {
 					fwrite(func(file *os.File) {
 						_, _ = file.WriteString(fmt.Sprintf("%v\n", os.Getpid()))
 					})
-					flog.Infof("Child pid %s%v%s Shotdown", flog.Magenta, os.Getpid(), flog.Reset)
+					glog.Infof("Child pid %s%v%s Shotdown", flog.Magenta, os.Getpid(), flog.Reset)
 				case syscall.SIGINT:
 					stop <- 1
 					return
@@ -94,7 +103,7 @@ func listenSig(app *fiber.App, cfg Config) {
 		signal.Notify(c, cfg.Sig)
 		for {
 			sig := <-c
-			flog.Info("Received signal:", sig)
+			glog.Info("Received signal:", sig)
 			switch sig {
 			case cfg.Sig:
 				f, _ := os.Create(FIBER_CHILD_LOCK_FILE)
@@ -105,7 +114,7 @@ func listenSig(app *fiber.App, cfg Config) {
 				} else {
 					stop(app, cfg.Timeout)
 				}
-				flog.Infof("Main pid %s%v%s Shotdown", flog.Magenta, os.Getpid(), flog.Reset)
+				glog.Infof("Main  pid %s%v%s Shotdown", flog.Magenta, os.Getpid(), flog.Reset)
 				return
 			}
 		}
