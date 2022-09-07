@@ -38,7 +38,6 @@ kill -term pid
 ```
 
 ```text
-[GRACE] 2022/09/08 06:29:37 Received signal: terminated
 [GRACE] 2022/09/08 06:29:37 Child pid 35951 Shotdown
 [GRACE] 2022/09/08 06:29:37 Child pid 35953 Shotdown
 [GRACE] 2022/09/08 06:29:37 Child pid 35948 Shotdown

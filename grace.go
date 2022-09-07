@@ -107,7 +107,6 @@ func listenSig(app *fiber.App, cfg Config) {
 		signal.Notify(c, cfg.Sig)
 		for {
 			sig := <-c
-			glog.Info("Received signal:", sig)
 			switch sig {
 			case cfg.Sig:
 				f, _ := os.Create(FIBER_CHILD_LOCK_FILE)
