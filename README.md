@@ -1,8 +1,8 @@
 # Grace
 
-Fiber `Prefork` 模式下的优雅退出
-
 [![Build Status](https://travis-ci.org/ivpusic/grpool.svg?branch=master)](https://github.com/infinitasx/easi-go-aws)
+
+Fiber `Prefork` 模式下的优雅退出
 
 ## ⚙ Installation
 
