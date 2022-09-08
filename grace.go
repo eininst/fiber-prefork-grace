@@ -17,7 +17,7 @@ import (
 var glog flog.Interface
 
 func init() {
-	f := fmt.Sprintf("%s[GRACE]%s ${time} ${msg}", flog.Magenta, flog.Reset)
+	f := fmt.Sprintf(" ${time} ${level} %s[GRACE]%s ${msg}", flog.Magenta, flog.Reset)
 	glog = flog.New(flog.Config{
 		Format: f,
 	})
