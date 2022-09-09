@@ -37,6 +37,10 @@ var DefaultConfig = Config{
 var pidMap map[int]int
 
 func Listen(app *fiber.App, addr string, config ...Config) {
+	if !strings.HasPrefix(addr, ":") {
+		addr = fmt.Sprintf(":%s", addr)
+	}
+
 	cfg := DefaultConfig
 	if len(config) > 0 {
 		cfg = config[0]
@@ -64,6 +68,10 @@ func Listen(app *fiber.App, addr string, config ...Config) {
 }
 
 func ListenTLS(app *fiber.App, addr string, certFile, keyFile string, config ...Config) {
+	if !strings.HasPrefix(addr, ":") {
+		addr = fmt.Sprintf(":%s", addr)
+	}
+
 	cfg := DefaultConfig
 	if len(config) > 0 {
 		cfg = config[0]
